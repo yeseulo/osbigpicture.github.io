@@ -31,9 +31,13 @@ const Title = forwardRef(
       <TitleContainer lang={lang} grid={grid} ref={ref}>
         <TitleText>{TITLE[lang]}</TitleText>
         <Timer>
-          10,619 {UNIT[lang].days} 24 {UNIT[lang].hours} 60 {UNIT[lang].minutes}{" "}
-          60
-          {UNIT[lang].seconds}
+          <span>10,619 {UNIT[lang].days}</span>{" "}
+          <span>24 {UNIT[lang].hours}</span>{" "}
+          <span>60 {UNIT[lang].minutes}</span>{" "}
+          <span>
+            60
+            {UNIT[lang].seconds}
+          </span>
         </Timer>
       </TitleContainer>
     );
@@ -92,5 +96,9 @@ const Timer = styled.h2<{ grid?: string }>`
   }
   @media ${mq.desktop} {
     font-size: 4rem;
+  }
+
+  span {
+    display: inline-block;
   }
 `;
