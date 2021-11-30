@@ -1,3 +1,23 @@
+export const TITLE = {
+  ko: "서체를 다운받기 위해 남은 시간",
+  en: "The typeface will be available in",
+};
+
+export const LANGUAGES = {
+  ko: "한국어",
+  en: "English",
+};
+
+export const DOWNLOAD_LABEL = {
+  ko: "서체 다운로드",
+  en: "Download typeface",
+};
+
+export const STANDARD = {
+  ko: "한국 표준시",
+  en: "KST",
+};
+
 export const ABOUT = {
   ko: `오예슬·장우석 <br />2013년을 시작으로 다양한 방식의 협업을 이어오고 있다. 주로 웹을
       기반으로 작업하며 외부의 필요에 의한 작업을 이어왔으나 최근의 전지구적

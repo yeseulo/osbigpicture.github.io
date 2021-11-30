@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
-import { mq } from "utils/mq";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
