@@ -1,29 +1,20 @@
 import styled, { css } from "styled-components";
+
 import { Language } from "types";
+import { mq } from "utils/mq";
+import { DOWNLOAD_LABEL, STANDARD } from "data";
 
 type Props = {
   lang: Language;
   grid?: string;
 };
 
-const LABEL = {
-  ko: "서체 다운로드",
-  en: "Download typeface",
-};
-
-const STANDARD = {
-  ko: "한국 표준시",
-  en: "KST",
-};
-
 const Download = ({ lang, grid }: Props) => {
-  console.log(lang);
-
   return (
     <DownloadContainer grid={grid}>
       <Standard>{STANDARD[lang]}</Standard>
       <Button disabled lang={lang}>
-        {LABEL[lang]}
+        {DOWNLOAD_LABEL[lang]}
       </Button>
     </DownloadContainer>
   );
@@ -38,16 +29,25 @@ const DownloadContainer = styled.div<{ grid?: string }>`
           grid-area: ${props.grid};
         `
       : css``};
-  margin-top: 2rem;
-  margin-bottom: 7rem;
+  margin-top: 1.9rem;
+  margin-bottom: 5rem;
+
+  @media ${mq.tablet} {
+    margin-top: 1.8rem;
+    margin-bottom: 7rem;
+  }
 `;
 
 const Standard = styled.div`
-  margin-top: 1.8rem;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
   line-height: 1.67;
   text-align: center;
+
+  @media ${mq.tablet} {
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+  }
 `;
 
 const Button = styled.button<{
@@ -57,11 +57,25 @@ const Button = styled.button<{
   display: block;
   margin: 0 auto;
   padding: ${(props) =>
-    props.lang === "ko" ? `1.9rem 3.5rem` : `1.8rem 3.5rem 2rem`};
+    props.lang === "ko" ? `1.3rem 2.5rem` : `1.4rem 2.2rem 1.2rem`};
   color: #ddd;
-  font-size: 4rem;
+  font-size: 3.2rem;
   line-height: 1;
   border: 1px solid #ddd;
+  background: none;
+  border-radius: 0;
+
+  @media ${mq.tablet} {
+    font-size: 3.6rem;
+    padding: ${(props) =>
+      props.lang === "ko" ? `1.9rem 3rem` : `1.9rem 3rem`};
+  }
+
+  @media ${mq.desktop} {
+    font-size: 4rem;
+    padding: ${(props) =>
+      props.lang === "ko" ? `1.9rem 3.5rem` : `1.8rem 3.5rem 2rem`};
+  }
 
   &:disabled {
     background-color: transparent;
