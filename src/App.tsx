@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 
 import GlobalStyles from "components/GlobalStyles";
@@ -9,26 +9,71 @@ import { Language } from "types";
 import { ABOUT, ARTICLE1, ARTICLE2, LANGUAGES } from "data";
 import { mq } from "utils/mq";
 
+const SCROLL_MARGIN_TOP = 71;
+
 function App() {
   const koreanRef = useRef<HTMLDivElement>(null);
   const englishRef = useRef<HTMLDivElement>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<Language>("ko");
 
   const onClickLanguage = (
-    ref: React.MutableRefObject<HTMLDivElement | null>
+    ref: React.MutableRefObject<HTMLDivElement | null>,
+    lang: Language
   ) => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
+  useEffect(() => {
+    const checkScrollPosition = (posY: number) => {
+      if (!englishRef.current) {
+        return false;
+      }
+
+      if (posY >= englishRef.current.offsetTop - SCROLL_MARGIN_TOP) {
+        setSelectedLanguage("en");
+      } else {
+        setSelectedLanguage("ko");
+      }
+    };
+
+    let ticking = false;
+
+    const onWindowScroll = () => {
+      let posY = window.scrollY;
+
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          checkScrollPosition(posY);
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onWindowScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onWindowScroll);
+    };
+  }, []);
+
   return (
     <>
       <GlobalStyles />
       <LanguageSelector>
-        <Button selected onClick={() => onClickLanguage(koreanRef)}>
+        <Button
+          selected={selectedLanguage === "ko"}
+          onClick={() => onClickLanguage(koreanRef, "ko")}
+        >
           {LANGUAGES.ko}
         </Button>
-        <Button onClick={() => onClickLanguage(englishRef)}>
+        <Button
+          selected={selectedLanguage === "en"}
+          onClick={() => onClickLanguage(englishRef, "en")}
+        >
           {LANGUAGES.en}
         </Button>
       </LanguageSelector>
