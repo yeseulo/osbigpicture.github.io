@@ -35,12 +35,6 @@ const GlobalStyles = createGlobalStyle`
 
   :root {
     font-size: 62.5%;
-    @media ${mq.laptop} {
-      font-size: 100%;
-    }
-    @media ${mq.desktop} {
-      font-size: 128.125%;
-    }
   }
 
   @media screen and (min-width: 0\0) {
@@ -59,6 +53,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
+    color: #000;
     font-size: 1.6rem;
     font-family: 'Propaganda', sans-serif;
     word-break: keep-all;
