@@ -1,6 +1,7 @@
 import GlobalStyles from "components/GlobalStyles";
 import styled, { css } from "styled-components";
 import Title from "components/Title";
+import Download from "components/Download";
 import { Language } from "types";
 
 function App() {
@@ -8,11 +9,9 @@ function App() {
     <>
       <GlobalStyles />
       <Container>
-        <Title
-          lang="ko"
-          title="서체를 다운받기 위해 남은 시간"
-          grid="title_ko"
-        />
+        <LanguageContainer grid="language_ko">한국어</LanguageContainer>
+        <Title lang="ko" grid="title_ko" />
+        <Download lang="ko" grid="download_ko" />
         <Article lang="ko" grid="article1_ko">
           상호작용을 위한 언어 사용—예를 들어, 대화나 편지교환—은 일종의 거리
           재기에서 시작됩니다. 측정된 심리적·관계적 거리에 따라 단어의 선택과
@@ -85,11 +84,9 @@ function App() {
           ‘다음’을 도모하는 방향으로, 서로의 관심사와 능력을 동력삼아 밀고
           당기며 작업을 이어가고 있다.
         </Article>
-        <Title
-          lang="en"
-          title="The typeface will be available in"
-          grid="title_en"
-        />
+        <LanguageContainer grid="language_en">English</LanguageContainer>
+        <Title lang="en" grid="title_en" />
+        <Download lang="en" grid="download_en" />
         <Article lang="en" grid="article1_en">
           The use of language for the purpose of interaction—i.e. conversing or
           exchanging letters—begins with gauging the distance. The selection of
@@ -191,12 +188,13 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
+    "language_ko language_en"
     "title_ko title_en"
+    "download_ko download_en"
     "article1_ko article1_en"
     "article2_ko article2_en"
     "about_ko about_en";
   column-gap: 4rem;
-  row-gap: 5rem;
   padding: 1rem 2rem 5rem;
   max-width: 164rem;
   margin: 0 auto;
@@ -219,9 +217,11 @@ const Article = styled.article<{
   ${(props) =>
     props.half
       ? css`
+          margin-top: 5rem;
           padding-left: 50%;
         `
       : css``};
+
   font-size: 1.8rem;
   font-weight: normal;
   line-height: ${(props) => (props.lang === "ko" ? 1.6667 : 1.3333)};
@@ -230,6 +230,7 @@ const Article = styled.article<{
     props.lined
       ? css`
           position: relative;
+          margin-top: 5rem;
           padding-top: 5rem;
 
           &:before {
@@ -244,4 +245,16 @@ const Article = styled.article<{
           }
         `
       : css``};
+`;
+
+const LanguageContainer = styled.div<{ grid?: string }>`
+  ${(props) =>
+    props.grid
+      ? css`
+          grid-area: ${props.grid};
+        `
+      : css``};
+  font-size: 1.8rem;
+  line-height: 1.66667;
+  text-transform: uppercase;
 `;
