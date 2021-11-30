@@ -1,2 +1,0 @@
-(this["webpackJsonposbigpicture.github.io"]=this["webpackJsonposbigpicture.github.io"]||[]).push([[0],{9:function(e,t,i){"use strict";i.r(t);var c=i(1),r=i.n(c),n=i(3),s=i.n(n),o=i(0);var b=function(){return Object(o.jsx)("div",{className:"App",children:Object(o.jsx)("h1",{children:"hello world"})})};s.a.render(Object(o.jsx)(r.a.StrictMode,{children:Object(o.jsx)(b,{})}),document.getElementById("root"))}},[[9,1,2]]]);
-//# sourceMappingURL=main.96a54dc0.chunk.js.map
