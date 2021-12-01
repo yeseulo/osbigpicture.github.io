@@ -256,6 +256,7 @@ const Button = styled.button<{ selected?: boolean }>`
   display: block;
   width: 50%;
   padding: 1rem 1rem 1.2rem;
+  color: #000;
   font-size: 1.8rem;
   line-height: 1;
   background: #fff;
