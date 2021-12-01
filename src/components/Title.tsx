@@ -32,7 +32,7 @@ const UNIT = {
   },
 };
 
-const D_DAY: Date = new Date("2050-12-09:00:00:00+0900");
+const D_DAY: Date = new Date(2050, 11, 9, 0, 0, 0, 0);
 const TIME_DIFF_KST = 9 * 60 * 60 * 1000;
 
 const Title = forwardRef(
@@ -44,12 +44,18 @@ const Title = forwardRef(
       seconds: 0,
     });
 
-    const getTime = useCallback(() => {
-      let today: Date = new Date();
-      const utc = today.getTime() + today.getTimezoneOffset() * 60 * 1000;
-      today = new Date(utc + TIME_DIFF_KST);
+    const makeTwoDigitNumber = (num: number): string | number =>
+      num < 10 ? `0${num}` : num;
 
-      const gap: number = D_DAY.getTime() - today.getTime();
+    const getTime = useCallback(() => {
+      const today: Date = new Date();
+      const today_utc = today.getTime() + today.getTimezoneOffset() * 60 * 1000;
+      const today_kst = new Date(today_utc + TIME_DIFF_KST);
+
+      const dday_utc = D_DAY.getTime() + D_DAY.getTimezoneOffset() * 60 * 1000;
+      const dday_kst = new Date(dday_utc + TIME_DIFF_KST);
+
+      const gap: number = dday_kst.getTime() - today_kst.getTime();
 
       const days: number = Math.floor(gap / 1000 / 60 / 60 / 24);
       const hours: number = Math.floor(gap / 1000 / 60 / 60) % 24;
@@ -80,13 +86,13 @@ const Title = forwardRef(
             {timer.days.toLocaleString("ko-KR")} {UNIT[lang].days}
           </span>{" "}
           <span>
-            {timer.hours} {UNIT[lang].hours}
+            {makeTwoDigitNumber(timer.hours)} {UNIT[lang].hours}
           </span>{" "}
           <span>
-            {timer.minutes} {UNIT[lang].minutes}
+            {makeTwoDigitNumber(timer.minutes)} {UNIT[lang].minutes}
           </span>{" "}
           <span>
-            {timer.seconds} {UNIT[lang].seconds}
+            {makeTwoDigitNumber(timer.seconds)} {UNIT[lang].seconds}
           </span>
         </Timer>
       </TitleContainer>
